@@ -90,10 +90,10 @@ funtions:
 
 resources:
   Resources:
-    PostsTable:
+    UserTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:custom.usersTableName}
+        TableName: ${self:custom.userTableName}
         AttributeDefinitions:
           - AttributeName: userId
             AttributeType: N
