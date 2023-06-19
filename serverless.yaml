@@ -2,10 +2,10 @@ service: oversecured-dynamodb-api
 
 provider:
   name: aws
-  runtime: nodejs19.x
+  runtime: nodejs18.x
   stage: dev
   region: us-west-1
-  enviromental:
+  environment:
     DYNAMODB_TABLE_NAME: ${self:custom.userTableName}
 
 custom:
@@ -14,7 +14,7 @@ custom:
 plugins:
   - serverless-iam-roles-per-function
 
-funtions:
+functions:
   getUser:
     handler: api.getUsers
     name: get-users
