@@ -16,13 +16,13 @@ plugins:
 
 functions:
   getUser:
-    handler: api.getUsers
-    name: get-users
+    handler: api.getUser
+    name: get-user
     memorySize: 128 # mb
     timeout: 5 # sec
     events:
       - http:
-          path: user/{userId}
+          path: users/{userId}
           method: GET
     iamRoleStatements:
       - Effect: "Allow"
@@ -36,7 +36,7 @@ functions:
     timeout: 5 # sec
     events:
       - http:
-          path: user
+          path: users
           method: POST
     iamRoleStatements:
       - Effect: "Allow"
@@ -50,7 +50,7 @@ functions:
     timeout: 5 # sec
     events:
       - http:
-          path: user/{userId}
+          path: users/{userId}
           method: POST
     iamRoleStatements:
       - Effect: "Allow"
@@ -64,7 +64,7 @@ functions:
     timeout: 5 # sec
     events:
       - http:
-          path: user/{userId}
+          path: users/{userId}
           method: DELETE
     iamRoleStatements:
       - Effect: "Allow"
@@ -78,7 +78,7 @@ functions:
     timeout: 5 #sec
     events:
       - http:
-          path: user
+          path: users
           method: GET
     iamRoleStatements:
       - Effect: "Allow"
