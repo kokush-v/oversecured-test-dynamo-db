@@ -1,0 +1,105 @@
+service: oversecured-dynamodb-api
+
+provider:
+  name: aws
+  runtime: nodejs19.x
+  stage: dev
+  region: us-west-1
+  enviromental:
+    DYNAMODB_TABLE_NAME: ${self:custom.userTableName}
+
+custom:
+  userTableName: user-table-${self:provider.stage}
+
+plugins:
+  - serverless-iam-roles-per-function
+
+funtions:
+  getUser:
+    handler: api.getUsers
+    name: get-users
+    memory: 128 # mb
+    timeout: 5 # sec
+    events:
+      - http:
+          path: user/{userId}
+          method: GET
+    iamRolesStatements:
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:GetItem"
+        Resource: !GetAtt UserTable.Arn
+  createUser:
+    handler: api.createUser
+    name: create-user
+    memory: 128 # mb
+    timeout: 5 # sec
+    events:
+      - http:
+          path: user
+          method: POST
+    iamRolesStatements:
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:PutItem"
+        Resource: !GetAtt UserTable.Arn
+  updateUser:
+    handler: api.updateUser
+    name: update-user
+    memory: 128 # mb
+    timeout: 5 # sec
+    events:
+      - http:
+          path: user/{userId}
+          method: POST
+    iamRolesStatements:
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:UpdateItem"
+        Resource: !GetAtt UserTable.Arn
+  delteUser:
+    handler: api.delteUser
+    name: delte-user
+    memory: 128 # mb
+    timeout: 5 # sec
+    events:
+      - http:
+          path: user/{userId}
+          method: DELETE
+    iamRolesStatements:
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:DelteItem"
+        Resource: !GetAtt UserTable.Arn
+  getAllUsers:
+    handler: api.getAllUsers
+    name: get-all-users
+    memory: 128 #mb
+    timeout: 5 #sec
+    events:
+      - http:
+          path: user
+          method: GET
+    iamRolesStatements:
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:Scan"
+        Resource: !GetAtt UserTable.Arn
+
+  
+
+resources:
+  Resources:
+    UserTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.userTableName}
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: N
+        KeySchema:
+          Attributename: userId
+          KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
