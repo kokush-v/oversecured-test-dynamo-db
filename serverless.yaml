@@ -96,7 +96,7 @@ resources:
         TableName: ${self:custom.userTableName}
         AttributeDefinitions:
           - AttributeName: userId
-            AttributeType: N
+            AttributeType: S
         KeySchema:
           - AttributeName: userId
             KeyType: HASH
