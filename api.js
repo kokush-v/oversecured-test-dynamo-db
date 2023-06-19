@@ -64,7 +64,34 @@ const createUser = async (event) => {
    return response;
 };
 
+const getAllUsers = async () => {
+   const response = { statusCode: 200 };
+
+   try {
+      const { Items } = await db.send(
+         new ScanCommand({ TableName: process.env.DYNAMODB_TABLE_NAME })
+      );
+
+      response.body = JSON.stringify({
+         message: "Successfully GET all users",
+         data: Items.map((item) => unmarshall(item)),
+         Items,
+      });
+   } catch (e) {
+      console.error(e);
+      response.statusCode = 500;
+      response.body = JSON.stringify({
+         message: "Failed GET all users",
+         errorMsg: e.message,
+         errorStack: e.stack,
+      });
+   }
+
+   return response;
+};
+
 module.exports = {
    getUser,
    createUser,
+   getAllUsers,
 };
