@@ -18,13 +18,13 @@ functions:
   getUser:
     handler: api.getUsers
     name: get-users
-    memory: 128 # mb
+    memorySize: 128 # mb
     timeout: 5 # sec
     events:
       - http:
           path: user/{userId}
           method: GET
-    iamRolesStatements:
+    iamRoleStatements:
       - Effect: "Allow"
         Action:
           - "dynamodb:GetItem"
@@ -32,13 +32,13 @@ functions:
   createUser:
     handler: api.createUser
     name: create-user
-    memory: 128 # mb
+    memorySize: 128 # mb
     timeout: 5 # sec
     events:
       - http:
           path: user
           method: POST
-    iamRolesStatements:
+    iamRoleStatements:
       - Effect: "Allow"
         Action:
           - "dynamodb:PutItem"
@@ -46,27 +46,27 @@ functions:
   updateUser:
     handler: api.updateUser
     name: update-user
-    memory: 128 # mb
+    memorySize: 128 # mb
     timeout: 5 # sec
     events:
       - http:
           path: user/{userId}
           method: POST
-    iamRolesStatements:
+    iamRoleStatements:
       - Effect: "Allow"
         Action:
           - "dynamodb:UpdateItem"
         Resource: !GetAtt UserTable.Arn
-  delteUser:
+  deleteUser:
     handler: api.delteUser
     name: delte-user
-    memory: 128 # mb
+    memorySize: 128 # mb
     timeout: 5 # sec
     events:
       - http:
           path: user/{userId}
           method: DELETE
-    iamRolesStatements:
+    iamRoleStatements:
       - Effect: "Allow"
         Action:
           - "dynamodb:DelteItem"
@@ -74,13 +74,13 @@ functions:
   getAllUsers:
     handler: api.getAllUsers
     name: get-all-users
-    memory: 128 #mb
+    memorySize: 128 #mb
     timeout: 5 #sec
     events:
       - http:
           path: user
           method: GET
-    iamRolesStatements:
+    iamRoleStatements:
       - Effect: "Allow"
         Action:
           - "dynamodb:Scan"
