@@ -12,9 +12,10 @@ const getUser = async (event) => {
    const responce = {
       statusCode: 200,
       headers: {
-         "Access-Control-Allow-Headers": "Content-Type",
-         "Access-Control-Allow-Origin": "http://localhost:5173",
-         "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE",
+         "Access-Control-Allow-Headers":
+            "Origin, X-Requested-With, Content-Type, Accept",
       },
    };
 
@@ -47,9 +48,10 @@ const createUser = async (event) => {
    const response = {
       statusCode: 200,
       headers: {
-         "Access-Control-Allow-Headers": "Content-Type",
-         "Access-Control-Allow-Origin": "http://localhost:5173",
-         "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE",
+         "Access-Control-Allow-Headers":
+            "Origin, X-Requested-With, Content-Type, Accept",
       },
    };
 
@@ -82,9 +84,10 @@ const updateUser = async (event) => {
    const response = {
       statusCode: 200,
       headers: {
-         "Access-Control-Allow-Headers": "Content-Type",
-         "Access-Control-Allow-Origin": "http://localhost:5173",
-         "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE",
+         "Access-Control-Allow-Headers":
+            "Origin, X-Requested-With, Content-Type, Accept",
       },
    };
 
@@ -137,9 +140,10 @@ const deleteUser = async (event) => {
    const response = {
       statusCode: 200,
       headers: {
-         "Access-Control-Allow-Headers": "Content-Type",
-         "Access-Control-Allow-Origin": "http://localhost:5173",
-         "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE",
+         "Access-Control-Allow-Headers":
+            "Origin, X-Requested-With, Content-Type, Accept",
       },
    };
 
@@ -171,9 +175,10 @@ const getAllUsers = async () => {
    const response = {
       statusCode: 200,
       headers: {
-         "Access-Control-Allow-Headers": "Content-Type",
-         "Access-Control-Allow-Origin": "http://localhost:5173",
-         "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE",
+         "Access-Control-Allow-Headers":
+            "Origin, X-Requested-With, Content-Type, Accept",
       },
    };
 
