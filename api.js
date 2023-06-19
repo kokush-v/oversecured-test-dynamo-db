@@ -48,7 +48,7 @@ const createUser = async (event) => {
       const createResult = await db.send(new PutItemCommand(params));
 
       response.body = JSON.stringify({
-         message: "Successfully PUT user",
+         message: "Success PUT user",
          createResult,
       });
    } catch (e) {
@@ -56,6 +56,81 @@ const createUser = async (event) => {
       response.statusCode = 500;
       response.body = JSON.stringify({
          message: "Failed PUT user",
+         errorMsg: e.message,
+         errorStack: e.stack,
+      });
+   }
+
+   return response;
+};
+
+const updateUser = async (event) => {
+   const response = { statusCode: 200 };
+
+   try {
+      const body = JSON.parse(event.body);
+      const objKeys = Object.keys(body);
+      const params = {
+         TableName: process.env.DYNAMODB_TABLE_NAME,
+         Key: marshall({ postId: event.pathParameters.postId }),
+         UpdateExpression: `SET ${objKeys
+            .map((_, index) => `#key${index} = :value${index}`)
+            .join(", ")}`,
+         ExpressionAttributeNames: objKeys.reduce(
+            (acc, key, index) => ({
+               ...acc,
+               [`#key${index}`]: key,
+            }),
+            {}
+         ),
+         ExpressionAttributeValues: marshall(
+            objKeys.reduce(
+               (acc, key, index) => ({
+                  ...acc,
+                  [`:value${index}`]: body[key],
+               }),
+               {}
+            )
+         ),
+      };
+      const updateResult = await db.send(new UpdateItemCommand(params));
+
+      response.body = JSON.stringify({
+         message: "Success UPDATE user",
+         updateResult,
+      });
+   } catch (e) {
+      console.error(e);
+      response.statusCode = 500;
+      response.body = JSON.stringify({
+         message: "Failed UPDATE user",
+         errorMsg: e.message,
+         errorStack: e.stack,
+      });
+   }
+
+   return response;
+};
+
+const deleteUser = async (event) => {
+   const response = { statusCode: 200 };
+
+   try {
+      const params = {
+         TableName: process.env.DYNAMODB_TABLE_NAME,
+         Key: marshall({ postId: event.pathParameters.postId }),
+      };
+      const deleteResult = await db.send(new DeleteItemCommand(params));
+
+      response.body = JSON.stringify({
+         message: "Success DELETE user",
+         deleteResult,
+      });
+   } catch (e) {
+      console.error(e);
+      response.statusCode = 500;
+      response.body = JSON.stringify({
+         message: "Failed DELTE user",
          errorMsg: e.message,
          errorStack: e.stack,
       });
@@ -73,7 +148,7 @@ const getAllUsers = async () => {
       );
 
       response.body = JSON.stringify({
-         message: "Successfully GET all users",
+         message: "Success GET all users",
          data: Items.map((item) => unmarshall(item)),
          Items,
       });
@@ -93,5 +168,7 @@ const getAllUsers = async () => {
 module.exports = {
    getUser,
    createUser,
+   updateUser,
+   deleteUser,
    getAllUsers,
 };
