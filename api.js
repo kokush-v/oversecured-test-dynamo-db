@@ -9,7 +9,14 @@ const {
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 
 const getUser = async (event) => {
-   const responce = { statusCode: 200 };
+   const responce = {
+      statusCode: 200,
+      headers: {
+         "Access-Control-Allow-Headers": "Content-Type",
+         "Access-Control-Allow-Origin": "http://localhost:5173",
+         "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+   };
 
    try {
       const params = {
@@ -37,7 +44,14 @@ const getUser = async (event) => {
 };
 
 const createUser = async (event) => {
-   const response = { statusCode: 200 };
+   const response = {
+      statusCode: 200,
+      headers: {
+         "Access-Control-Allow-Headers": "Content-Type",
+         "Access-Control-Allow-Origin": "http://localhost:5173",
+         "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+   };
 
    try {
       const body = JSON.parse(event.body);
@@ -65,7 +79,14 @@ const createUser = async (event) => {
 };
 
 const updateUser = async (event) => {
-   const response = { statusCode: 200 };
+   const response = {
+      statusCode: 200,
+      headers: {
+         "Access-Control-Allow-Headers": "Content-Type",
+         "Access-Control-Allow-Origin": "http://localhost:5173",
+         "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+   };
 
    try {
       const body = JSON.parse(event.body);
@@ -113,7 +134,14 @@ const updateUser = async (event) => {
 };
 
 const deleteUser = async (event) => {
-   const response = { statusCode: 200 };
+   const response = {
+      statusCode: 200,
+      headers: {
+         "Access-Control-Allow-Headers": "Content-Type",
+         "Access-Control-Allow-Origin": "http://localhost:5173",
+         "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+   };
 
    try {
       const params = {
@@ -140,7 +168,14 @@ const deleteUser = async (event) => {
 };
 
 const getAllUsers = async () => {
-   const response = { statusCode: 200 };
+   const response = {
+      statusCode: 200,
+      headers: {
+         "Access-Control-Allow-Headers": "Content-Type",
+         "Access-Control-Allow-Origin": "http://localhost:5173",
+         "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+   };
 
    try {
       const { Items } = await db.send(
