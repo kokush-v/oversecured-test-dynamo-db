@@ -20,14 +20,14 @@ const getUser = async (event) => {
       console.log({ Item });
 
       responce.body = JSON.stringify({
-         message: "Succses GET",
+         message: "Succses GET user",
          body: Item ? unmarshall(Item) : {},
       });
    } catch (error) {
       console.error(error);
       responce.statusCode = 500;
       responce.body = JSON.stringify({
-         message: "Failed GET",
+         message: "Failed GET user",
          eMessage: error.message,
          errorStacl: error.stack,
       });
@@ -48,14 +48,14 @@ const createUser = async (event) => {
       const createResult = await db.send(new PutItemCommand(params));
 
       response.body = JSON.stringify({
-         message: "Successfully created post.",
+         message: "Successfully PUT user",
          createResult,
       });
    } catch (e) {
       console.error(e);
       response.statusCode = 500;
       response.body = JSON.stringify({
-         message: "Failed to create post.",
+         message: "Failed PUT user",
          errorMsg: e.message,
          errorStack: e.stack,
       });
