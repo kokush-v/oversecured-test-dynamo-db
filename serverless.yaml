@@ -90,16 +90,16 @@ funtions:
 
 resources:
   Resources:
-    UserTable:
+    PostsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:custom.userTableName}
+        TableName: ${self:custom.usersTableName}
         AttributeDefinitions:
           - AttributeName: userId
             AttributeType: N
         KeySchema:
-          Attributename: userId
-          KeyType: HASH
+          - AttributeName: userId
+            KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
