@@ -1,4 +1,4 @@
-const { DynamoDbClient } = require("@aws-sdk/client-dynamodb");
-const client = new DynamoDbClient({});
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const client = new DynamoDBClient({});
 
 module.exports = client;
