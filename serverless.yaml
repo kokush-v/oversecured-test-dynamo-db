@@ -58,8 +58,8 @@ functions:
           - "dynamodb:UpdateItem"
         Resource: !GetAtt UserTable.Arn
   deleteUser:
-    handler: api.delteUser
-    name: delte-user
+    handler: api.deleteUser
+    name: delete-user
     memorySize: 128 # mb
     timeout: 5 # sec
     events:
@@ -69,7 +69,7 @@ functions:
     iamRoleStatements:
       - Effect: "Allow"
         Action:
-          - "dynamodb:DelteItem"
+          - "dynamodb:DeleteItem"
         Resource: !GetAtt UserTable.Arn
   getAllUsers:
     handler: api.getAllUsers
