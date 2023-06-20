@@ -29,7 +29,6 @@ const getUser = async (event) => {
 
       responce.body = JSON.stringify({
          message: "Succses GET user",
-         body: Item ? unmarshall(Item) : {},
       });
    } catch (error) {
       console.error(error);
