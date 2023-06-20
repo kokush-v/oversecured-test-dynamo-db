@@ -11,6 +11,12 @@ const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 const getUser = async (event) => {
    const responce = {
       statusCode: 200,
+      headers: {
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE",
+         "Access-Control-Allow-Headers":
+            "Origin, X-Requested-With, Content-Type, Accept",
+      },
    };
 
    try {
@@ -41,6 +47,12 @@ const getUser = async (event) => {
 const createUser = async (event) => {
    const response = {
       statusCode: 200,
+      headers: {
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE",
+         "Access-Control-Allow-Headers":
+            "Origin, X-Requested-With, Content-Type, Accept",
+      },
    };
 
    try {
@@ -71,6 +83,12 @@ const createUser = async (event) => {
 const updateUser = async (event) => {
    const response = {
       statusCode: 200,
+      headers: {
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE",
+         "Access-Control-Allow-Headers":
+            "Origin, X-Requested-With, Content-Type, Accept",
+      },
    };
 
    try {
@@ -121,6 +139,12 @@ const updateUser = async (event) => {
 const deleteUser = async (event) => {
    const response = {
       statusCode: 200,
+      headers: {
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE",
+         "Access-Control-Allow-Headers":
+            "Origin, X-Requested-With, Content-Type, Accept",
+      },
    };
 
    try {
@@ -150,6 +174,12 @@ const deleteUser = async (event) => {
 const getAllUsers = async () => {
    const response = {
       statusCode: 200,
+      headers: {
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE",
+         "Access-Control-Allow-Headers":
+            "Origin, X-Requested-With, Content-Type, Accept",
+      },
    };
 
    try {
