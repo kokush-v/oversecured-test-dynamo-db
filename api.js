@@ -137,16 +137,6 @@ const updateUser = async (event) => {
 };
 
 const deleteUser = async (event) => {
-   const response = {
-      statusCode: 200,
-      headers: {
-         "Access-Control-Allow-Origin": "*",
-         "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE",
-         "Access-Control-Allow-Headers":
-            "Origin, X-Requested-With, Content-Type, Accept",
-      },
-   };
-
    try {
       const params = {
          TableName: process.env.DYNAMODB_TABLE_NAME,
