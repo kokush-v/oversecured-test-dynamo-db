@@ -217,7 +217,7 @@ const filterUsers = async (event) => {
    };
    try {
       const command = {
-         TableName: "user-table-dev",
+         TableName: process.env.DYNAMODB_TABLE_NAME,
          FilterExpression: "contains(#name, :searchName)",
          ExpressionAttributeNames: {
             "#name": "name",
@@ -242,6 +242,8 @@ const filterUsers = async (event) => {
          errorStack: e.stack,
       });
    }
+
+   return response;
 };
 
 module.exports = {
