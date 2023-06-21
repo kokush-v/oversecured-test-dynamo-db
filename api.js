@@ -244,8 +244,6 @@ const filterUsers = async (event) => {
    }
 };
 
-filterUsers();
-
 module.exports = {
    getUser,
    createUser,
