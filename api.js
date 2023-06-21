@@ -216,34 +216,35 @@ const filterUsers = async (event) => {
       },
    };
    try {
-      const command = new ScanCommand({
+      const command = {
+         TableName: "user-table-dev",
          FilterExpression: "contains(#name, :searchName)",
          ExpressionAttributeNames: {
             "#name": "name",
          },
          ExpressionAttributeValues: {
-            ":searchName": event.pathParameters.query,
+            ":searchName": { S: event.pathParameters.query },
          },
-         ProjectionExpression: "name, surname, otherAttributes",
-         TableName: env.process.DYNAMODB_TABLE_NAME,
-      });
+      };
 
-      const { Items } = await db.send(new QueryCommand(command));
+      const { Items } = await db.send(new ScanCommand(command));
 
       response.body = JSON.stringify({
-         message: "Success GET filtered users",
+         message: "Success GET serched users",
          data: Items.map((item) => unmarshall(item)),
       });
    } catch (e) {
       console.error(e);
       response.statusCode = 500;
       response.body = JSON.stringify({
-         message: "Failed GET filtered users",
+         message: "Failed GET serched users",
          errorMsg: e.message,
          errorStack: e.stack,
       });
    }
 };
+
+filterUsers();
 
 module.exports = {
    getUser,
