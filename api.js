@@ -218,9 +218,11 @@ const filterUsers = async (event) => {
    try {
       const command = {
          TableName: process.env.DYNAMODB_TABLE_NAME,
-         FilterExpression: "contains(#name, :searchName)",
+         FilterExpression:
+            "contains(#name, :searchName) OR contains(#surname, :searchName)",
          ExpressionAttributeNames: {
             "#name": "name",
+            "#surname": "surname",
          },
          ExpressionAttributeValues: {
             ":searchName": { S: event.pathParameters.query },
