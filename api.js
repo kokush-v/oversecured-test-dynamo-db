@@ -5,6 +5,7 @@ const {
    UpdateItemCommand,
    DeleteItemCommand,
    ScanCommand,
+   QueryCommand,
 } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 
@@ -204,10 +205,51 @@ const getAllUsers = async () => {
    return response;
 };
 
+const filterUsers = async (event) => {
+   const response = {
+      statusCode: 200,
+      headers: {
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE",
+         "Access-Control-Allow-Headers":
+            "Origin, X-Requested-With, Content-Type, Accept",
+      },
+   };
+   try {
+      const command = new ScanCommand({
+         FilterExpression: "contains(#name, :searchName)",
+         ExpressionAttributeNames: {
+            "#name": "name",
+         },
+         ExpressionAttributeValues: {
+            ":searchName": event.pathParameters.query,
+         },
+         ProjectionExpression: "name, surname, otherAttributes",
+         TableName: env.process.DYNAMODB_TABLE_NAME,
+      });
+
+      const { Items } = await db.send(new QueryCommand(command));
+
+      response.body = JSON.stringify({
+         message: "Success GET filtered users",
+         data: Items.map((item) => unmarshall(item)),
+      });
+   } catch (e) {
+      console.error(e);
+      response.statusCode = 500;
+      response.body = JSON.stringify({
+         message: "Failed GET filtered users",
+         errorMsg: e.message,
+         errorStack: e.stack,
+      });
+   }
+};
+
 module.exports = {
    getUser,
    createUser,
    updateUser,
    deleteUser,
    getAllUsers,
+   filterUsers,
 };

@@ -85,6 +85,20 @@ functions:
         Action:
           - "dynamodb:Scan"
         Resource: !GetAtt UserTable.Arn
+  filterUsers:
+    handler: api.filterUsers
+    name: filter-all-users
+    memorySize: 128 #mb
+    timeout: 5 #sec
+    events:
+      - http:
+          path: users/{query}
+          method: GET
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:Scan"
+        Resource: !GetAtt UserTable.Arn
 
   
 
