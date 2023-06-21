@@ -92,7 +92,7 @@ functions:
     timeout: 5 #sec
     events:
       - http:
-          path: users/{query}
+          path: users/find/{query}
           method: GET
     iamRoleStatements:
       - Effect: "Allow"
